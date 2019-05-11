@@ -1,6 +1,5 @@
 local blacklisted = {
     ["gb_rocket_nebel"] = true,
-    ["gb_shell_50mm"] = true,
     ["gb_shell_57mm"] = true,
     ["gb_shell_75mm"] = true,
     ["gb_shell_76mm"] = true,
