@@ -1,12 +1,22 @@
-local function wrapInitHull()
-    local gredBase = scripted_ents.GetStored("gred_emp_base")
-    local init = gredBase.t.InitHull
-    
-    gredBase.t.InitHull = function(self, ...) 
-        init(self, ...) 
-        parent = self:GetParent()
-        parent:CPPISetOwner(self.Owner)
+local function wrap(func)
+    return function(self, ...) 
+        func(self, ...) 
+        if not IsValid(self.Owner) then return end
+        
+        local hull = self:GetParent()
+        if not IsValid(hull) then return end
+        hull:CPPISetOwner(self.Owner)
+        
+        local yaw = hull:GetParent()
+        if not IsValid(yaw) then return end
+        yaw:CPPISetOwner(self.Owner)
     end
+end
+
+local function wrapInitFunctions()
+    local gredBase = scripted_ents.GetStored("gred_emp_base")
+    gredBase.t.InitYaw = wrap(gredBase.t.InitYaw)
+    gredBase.t.InitHull = wrap(gredBase.t.InitHull)
 end
 
 local function waitingFor()
@@ -19,13 +29,13 @@ local function onTimeout()
 end
 
 if Waiter then
-    Waiter.waitFor(waitingFor, wrapInitHull, onTimout )
+    Waiter.waitFor(waitingFor, wrapInitFunctions, onTimout )
 else
     WaiterQueue = WaiterQueue or {}
 
     local struct = {
         waitingFor = waitingFor,
-        onSuccess = wrapInitHull,
+        onSuccess = wrapInitFunctions,
         onTimeout = onTimout
     }
 
