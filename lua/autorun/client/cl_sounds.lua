@@ -14,7 +14,9 @@ local isBasedOn = scripted_ents.IsBasedOn
 hook.Remove("OnEntityCreated", "CFC_GredwitchEnhancementsSounds")
 hook.Add( "OnEntityCreated", "CFC_GredwitchEnhancementsSounds", function( ent )
     local class = ent:GetClass()
-    if class == "gred_emp_base" or isBasedOn( class, "gred_emp_base" ) then
+    local isEmplacement = class == "gred_emp_base" or isBasedOn( class, "gred_emp_base" )
+
+    if isEmplacement then
         timer.Simple(0.1, function()
             silenceEmplacement( ent, soundMultiplier )
         end )
