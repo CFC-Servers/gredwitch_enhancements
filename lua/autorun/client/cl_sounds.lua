@@ -11,7 +11,7 @@ end
 
 local isBasedOn = scripted_ents.IsBasedOn
 
-hook.Remove("OnEntityCreated", "CFC_GredwitchEnhancementsSounds")
+hook.Remove( "OnEntityCreated", "CFC_GredwitchEnhancementsSounds" )
 hook.Add( "OnEntityCreated", "CFC_GredwitchEnhancementsSounds", function( ent )
     local class = ent:GetClass()
     local isEmplacement = class == "gred_emp_base" or isBasedOn( class, "gred_emp_base" )
