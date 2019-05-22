@@ -4,7 +4,7 @@ local function silenceEmplacement( ent, m )
     if not ent.sounds then return end
     for k, sound in pairs(ent.sounds) do
         local soundLevel = sound:GetSoundLevel() * m
-        sound:SetSoundLevel( soundLevel * m)
+        sound:SetSoundLevel( soundLevel * m )
     end
 
 end
@@ -17,7 +17,7 @@ hook.Add( "OnEntityCreated", "CFC_GredwitchEnhancementsSounds", function( ent )
     local isEmplacement = class == "gred_emp_base" or isBasedOn( class, "gred_emp_base" )
 
     if isEmplacement then
-        timer.Simple(0.1, function()
+        timer.Simple( 0.1, function()
             silenceEmplacement( ent, soundMultiplier )
         end )
     end
