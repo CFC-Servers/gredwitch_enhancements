@@ -2,7 +2,7 @@ local soundMultiplier = 0.7
 
 local function silenceEmplacement( ent, m )
     if not ent.sounds then return end
-    for k, sound in pairs(ent.sounds) do
+    for k, sound in pairs( ent.sounds ) do
         local soundLevel = sound:GetSoundLevel() * m
         sound:SetSoundLevel( soundLevel * m )
     end
