@@ -36,7 +36,7 @@ else
     local struct = {
         waitingFor = waitingFor,
         onSuccess = wrapInitFunctions,
-        onTimeout = onTimout
+        onTimeout = onTimeout
     }
 
     table.insert( WaiterQueue, struct )
