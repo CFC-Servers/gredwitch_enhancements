@@ -29,7 +29,7 @@ local function onTimeout()
 end
 
 if Waiter then
-    Waiter.waitFor(waitingFor, wrapInitFunctions, onTimout )
+    Waiter.waitFor(waitingFor, wrapInitFunctions, onTimeout )
 else
     WaiterQueue = WaiterQueue or {}
 
